@@ -1,0 +1,42 @@
+.main {
+    min-height: 700px;
+    height: 700px;
+}
+
+.inner {
+    width: 900px;
+    margin: 0px auto;
+    font-size: 20px;
+}
+
+.inner input {
+    width: 800px;
+    display: inline-block;
+    margin-top: 20px;
+}
+
+#newsBody {
+    background: white;
+    margin-top: 20px;
+    font: "宋体";
+    font-size: 15px;
+}
+
+.glyphicon-log-in, .glyphicon-book, .glyphicon-tag {
+    margin-right: 5px;
+    color: #1cc09f;
+    top: 3px;
+}
+
+.btn {
+    font-size: 20px;
+    width: 100px;
+    height: 35px;
+    padding: 0px 0px;
+    float: right;
+    margin-top: 20px;
+}
+
+.w-e-text-container {
+    height: 380px !important;
+}

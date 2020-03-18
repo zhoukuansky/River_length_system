@@ -1,0 +1,107 @@
+.main{
+    min-height: 500px;
+    max-height: 700px;
+    height: 700px;
+    overflow: hidden;
+    padding-top: 15px;
+}
+.map_box{
+    margin: 0 auto;
+    height: 600px;
+    width: 1000px;
+    padding: 1px;
+    border: rgb(148, 204, 148) 2px solid;
+}
+.map{
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    display: none;
+    /* 默认隐藏 */
+    position: fixed;
+    /* 根据浏览器定位 */
+    z-index: 1;
+    /* 放在顶部 */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* 全宽 */
+    height: 100%;
+    /* 全高 */
+    overflow: auto;
+    /* 允许滚动 */
+    background-color: rgba(59, 66, 61, 0.8);
+    /* 背景色 */
+}
+
+.modal-content {
+    display: flex;
+    /*采用flexbox布局*/
+    flex-direction: column;
+    /*垂直排列*/
+    position: relative;
+    background-color: #fefefe;
+    margin: 10% auto;
+    /*距顶部15% 水平居中*/
+    padding: 0px 0px 0px 0px;
+    border: 1px solid #888;
+    width: 50%;
+    animation: topDown 0.4s;
+    /*自定义动画，从模态框内容上到下出现*/
+}
+
+@keyframes topDown {
+    from {
+        top: -300px;
+        opacity: 0
+    }
+    to {
+        top: 0;
+        opacity: 1
+    }
+}
+
+.modal-header {
+    display: flex;
+    /*采用flexbox布局*/
+    flex-direction: row;
+    /*水平布局*/
+    align-items: center;
+    /*内容垂直居中*/
+    justify-content: space-between;
+
+    background-color: rgb(91, 184, 91);
+    color: black;
+    padding: 0;
+    margin: 0;
+}
+
+h3 {
+    margin-left: 15px;
+}
+
+p {
+    margin-left: 15px;
+}
+
+#btnSure {
+    background-color: rgb(128, 187, 44);
+    color: black;
+    position: relative;
+    left: 45%;
+    top: 0px;
+    width: 70px;
+    height: 30px;
+    border: 1px solid rgb(38, 133, 68);
+    display: block;
+    margin: 0;
+    margin-bottom: 10px;
+}
+
+.modal-body {
+    color: black;
+    font-size: 16px;
+    margin-left: 10%;
+}

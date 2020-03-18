@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title></title>
+
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/phoneMap.css">
+    <link rel="stylesheet" href="../../css/phoneCommon.css">
+    <script type="text/javascript" src="//api.map.baidu.com/api?ak=4pZ2iYQTdC18Z40KHc9f2HLNGEZbcN4v&type=lite&v=1.0"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4pZ2iYQTdC18Z40KHc9f2HLNGEZbcN4v"></script>
+    <script src="../../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../../assets/vue/vue.min.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+</head>
+<!-- 320,520 -->
+<script>
+    //通过window.screen.width获取屏幕的宽度
+    var offWidth = 320 / 100; //这里用宽度/100表示1rem取得的px
+    document.getElementsByTagName("html")[0].style.fontSize = offWidth + 'px'; //把rem的值复制给顶级标签html的font-size
+</script>
+
+<body>
+    <div class="container clearfix">
+        <div class="row">
+            <div class="event_header">
+                <a href="phoneNewEvent.html">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <span class="event_title">地图位置选择</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="bMap" id="bMap"></div>
+        </div>
+        <div class="row">
+            <div class="map_info" id="map_info">
+                <div class="area_sheng area">
+                    <span>省+市+区：</span>
+                    <input type="text" v-model="gain" />
+                </div>
+                <div class="area_detailed area">
+                    <span>详细位置：</span>
+                    <input type="text" v-model="detailed" />
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-success queding" onclick="submit()">确定</button>
+    </div>
+
+</body>
+<script src="../../js/phoneCommon.js"></script>
+<script src="../../js/phoneMap.js "></script>
+
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title></title>
+
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../../css/phoneCommon.css"> -->
+    <link rel="stylesheet" href="../../css/phoneAllEvents.css">
+
+</head>
+<!-- 320,520 -->
+
+<body>
+<div class="container clearfix" id="conent">
+    <div class="row">
+        <div class="event_header">
+            <span class="event_title">事件管理</span>
+            <a href="phoneNewEvent.html">
+                +
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="btn_a">
+            <span class="glyphicon glyphicon-arrow-right"></span>
+            <a href="phonePrivate.html">去往个人中心</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="list">
+            <table id="table">
+                <thead>
+                <tr>
+                    <th class="td1">事件描述</th>
+                    <th class="td2">时间</th>
+                    <th class="td3">处理状态</th>
+                    <th class="td4">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="item in items">
+                    <td class="td1">{{item.problemDesc}}</td>
+                    <td class="td2">{{item.insertTime}}</td>
+
+                    <td class="td3 newEvent" v-if="item.status==0">新事件</td>
+                    <td class="td3" v-if="item.status==1">正在处理</td>
+                    <td class="td3" v-if="item.status==3">已完成</td>
+
+                    <td v-if="item.status==0" class="td4">
+                        <a :href="'phoneDeal.html?idid=0&id='+item.id">详情</a>
+                        <br>
+                        <a href="javascript:void(0);" :value="item.id" onclick="jieshou(this)">我来处理</a>
+                    </td>
+
+                    <td v-if="item.status==1" class="td4">
+                        <a :href="'phoneDeal.html?idid=1&id='+item.id">处理事件</a>
+                    </td>
+
+                    <td v-if="item.status==3" class="td4">
+                        <a :href="'phoneDeal.html?idid=3&id='+item.id">查看详情</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="pages_list" id="pages">
+            <ul class="pages">
+                <li>
+                    <a onclick="subPage()">&laquo;</a>
+                </li>
+                <input class="" type="text" v-model="now"/>/{{allPages}}页
+                <button class="btn btn-success btn-sm" onclick="skipPage()">转到</button>
+                <li>
+                    <a onclick="addPage()">&raquo;</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+<script src="../../assets/jquery/jquery-3.3.1.min.js"></script>
+<script src="../../assets/vue/vue.min.js"></script>
+<script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../js/phoneCommon.js"></script>
+<script src="../../js/phoneAllEvents.js"></script>
+
+</html>

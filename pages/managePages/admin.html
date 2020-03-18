@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>温江河长制系统管理界面</title>
+
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/manageCommon.css">
+
+    <script src="../../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../../assets/vue/vue.min.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<!-- 网站头部 -->
+<div class="header clearfix">
+    <a href="../index.html" target="_blank" title="去往网站主页...">
+        <span class="glyphicon glyphicon-home"></span>
+        <span>系统主页</span>
+    </a>
+    <ul class="ul_right" id="ul_right">
+        <li>
+            <span class="glyphicon glyphicon-user"></span>
+            <span>{{userId}}</span>
+        </li>
+        <li>
+            <span class="glyphicon glyphicon-cloud"></span>
+            <span>{{time}}</span>
+        </li>
+        <li class="last_li" title="退出登陆" onclick="loginOut()">
+            <div class="center-block">
+                <img src="../../images/source.png" width="40px" alt="">
+            </div>
+        </li>
+    </ul>
+</div>
+<!-- 网站左部导航栏 -->
+<div class="nav clearfix">
+    <ul>
+        <li>
+            <a href="admin.html?idid=0" name="aa">
+                <span class="glyphicon glyphicon-fire icon"></span>
+                <span>未完成事件</span>
+            </a>
+        </li>
+        <li>
+            <a href="admin.html?idid=1" name="aa">
+                <span class="glyphicon glyphicon-leaf icon"></span>
+                <span>已完成事件</span>
+            </a>
+        </li>
+        <li>
+            <a href="admin.html?idid=2" name="aa">
+                <span class="glyphicon glyphicon-th-large icon"></span>
+                <span>用户信息管理</span>
+            </a>
+        </li>
+        <li>
+            <a href="admin.html?idid=3" name="aa">
+                <span class="glyphicon glyphicon-th-list icon"></span>
+                <span>新闻消息管理</span>
+            </a>
+        </li>
+        <li>
+            <a href="admin.html?idid=4" name="aa">
+                <span class="glyphicon glyphicon-tint icon"></span>
+                <span>街镇动态管理</span>
+            </a>
+        </li>
+        <li>
+            <a href="admin.html?idid=5" name="aa">
+                <span class="icon glyphicon glyphicon-envelope"></span>
+                <span>工作简报管理</span>
+            </a>
+        </li>
+        <li>
+            <a href="admin.html?idid=6" name="aa">
+                <span class="icon glyphicon glyphicon-book"></span>
+                <span>政策制度管理</span>
+            </a>
+        </li>
+        <li>
+            <a href="admin.html?idid=7" name="aa">
+                <span class="glyphicon glyphicon-file icon"></span>
+                <span>文件法规管理</span>
+            </a>
+        </li>
+    </ul>
+</div>
+<!-- 网站右部主体部分 -->
+<div class="main clearfix">
+    <div class="handle">
+        <!-- 操作栏 -->
+        <div class="caozuo_word">
+            操作项
+            <span class="glyphicon glyphicon-flash"></span>
+        </div>
+        <div class="caozuo" id="caozuo">
+            <input type="text" class="form-control" maxlength="15">
+            <button class="btn btn-primary btn_caozuo">查询</button>
+            <button v-if="idid==0||idid==1||idid==2" class="btn btn-info btn_caozuo" onclick="typeManage()">类别管理
+            </button>
+            <button v-if="idid!=0&&idid!=1" class="btn btn-success btn_caozuo" onclick="addrecords(0)">新建</button>
+            <button v-if="idid!=0&&idid!=1" class="btn btn-danger btn_caozuo" value="-1" onclick="getId(this)"
+                    data-toggle="modal" data-target="#myModal">删除
+            </button>
+        </div>
+    </div>
+    <div class="main_inner">
+        <div class="table_list">
+
+            <!-- 未完成事件 idid=0 -->
+            <table class="list" v-if="idid==0" id="newEventTable">
+                <thead>
+                <tr>
+                    <th class="first_td">
+                        <input type="checkbox" id="checkboxALL" onclick="checkboxALL()">
+                    </th>
+                    <th class="num_td">编号</th>
+                    <th class="new_event1">事件描述</th>
+                    <th class="new_event2">上传时间</th>
+                    <th class="status">处理状态</th>
+                    <!-- <th class="new_event3"></th>
+                    <th class="new_event4"></th>
+                    <th class="new_event5"></th> -->
+                    <th class="last_td">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in items">
+                    <td class="first_td">
+                        <input type="checkbox" name="checkbox" id="checkbox" :value="item.id">
+                    </td>
+                    <td class="num_td">{{index+num+1}}</td>
+                    <td class="new_event1">{{item.problemDesc}}</td>
+                    <td class="new_event2">{{item.insertTime}}</td>
+                    <td class="status mark" v-if="item.statusMark">新事件</td>
+                    <td class="status" v-if="!item.statusMark">正在处理</td>
+                    <!-- <td class="new_event3"></td>
+                    <td class="new_event4"></td>
+                    <td class="new_event5"></td> -->
+                    <td v-if="item.statusMark" class="last_td">
+                        <a :href="'manageEvent.html?idid=0&markInput=0&id='+item.id">详情</a>&nbsp;&nbsp;&nbsp;
+                        <a href="" :value="item.id" onclick="jieshou(this)">开始处理</a>
+                    </td>
+                    <td v-if="!item.statusMark" class="last_td">
+                        <a :href="'manageEvent.html?idid=0&markInput=1&id='+item.id">编辑</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 已完成事件 idid=1 -->
+            <table class="list" v-if="idid==1" id="oldEventTable">
+                <thead>
+                <tr>
+                    <th class="first_td">
+                        <input type="checkbox" id="checkboxALL" onclick="checkboxALL()">
+                    </th>
+                    <th class="num_td">编号</th>
+                    <th class="new_event1">事件描述</th>
+                    <th class="new_event2">上传时间</th>
+                    <!-- <th class="new_event3"></th>
+                    <th class="new_event4"></th>
+                    <th class="new_event5"></th> -->
+                    <th class="last_td">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in items">
+                    <td class="first_td">
+                        <input type="checkbox" name="checkbox" id="checkbox" :value="item.id">
+                    </td>
+                    <td class="num_td">{{index+num+1}}</td>
+                    <td class="new_event1">{{item.problemDesc}}</td>
+                    <td class="new_event2">{{item.insertTime}}</td>
+                    <!-- <td class="new_event3"></td>
+                    <td class="new_event4"></td>
+                    <td class="new_event5"></td> -->
+                    <td class="last_td">
+                        <a :href="'manageEvent.html?idid=1&markInput=2&id='+item.id">查看详情</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 用户管理  idid=2 -->
+            <table class="list" v-if="idid==2" id="usersTable">
+                <thead>
+                <tr>
+                    <th class="first_td">
+                        <input type="checkbox" id="checkboxALL" onclick="checkboxALL()">
+                    </th>
+                    <th class="num_td">编号</th>
+                    <th class="user1">登录名</th>
+                    <th class="user2">用户姓名</th>
+                    <th class="user4">电话</th>
+                    <th class="user3">用户权限</th>
+                    <th class="last_td">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in items">
+                    <td class="first_td">
+                        <input type="checkbox" name="checkbox" id="checkbox" :value="item.id">
+                    </td>
+                    <td class="num_td">{{index+num+1}}</td>
+                    <td class="user1">{{item.loginName}}</td>
+                    <td class="user2">{{item.username}}</td>
+                    <td class="user4">{{item.tel}}</td>
+                    <td class="user3">{{item.userCategory}}</td>
+                    <td class="last_td">
+                        <a :value="item.id" onclick="updateUser(this,1)">编辑</a>&nbsp;
+                        <a :value="item.id" onclick="updePassword(this)">修改密码</a>&nbsp;
+                        <a href="" :value="item.id" data-toggle="modal" data-target="#myModal"
+                           onclick="getId(this)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 新闻管理  idid=3 -->
+            <table class="list" v-if="idid==3" id="newsTable">
+                <thead>
+                <tr>
+                    <th class="first_td">
+                        <input type="checkbox" id="checkboxALL" onclick="checkboxALL()">
+                    </th>
+                    <th class="num_td">编号</th>
+                    <th class="news1">新闻主题</th>
+                    <th class="news2">作者</th>
+                    <th class="news3">时间</th>
+                    <th class="last_td">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in items">
+                    <td class="first_td">
+                        <input type="checkbox" name="checkbox" id="checkbox" :value="item.id">
+                    </td>
+                    <td class="num_td">{{index+num+1}}</td>
+                    <td class="news1">{{item.title}}</td>
+                    <td class="news2">{{item.author}}</td>
+                    <td class="news3">{{item.insertTime}}</td>
+                    <td class="last_td">
+                        <a :href="'manageInfo.html?idid=3&id='+item.id">编辑</a>&nbsp;&nbsp;&nbsp;
+                        <a href="" :value="item.id" data-toggle="modal" data-target="#myModal"
+                           onclick="getId(this)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 街镇动态  idid=4 -->
+            <table class="list" v-if="idid==4" id="streetTable">
+                <thead>
+                <tr>
+                    <th class="first_td">
+                        <input type="checkbox" id="checkboxALL" onclick="checkboxALL()">
+                    </th>
+                    <th class="num_td">编号</th>
+                    <th class="news1" v-if="idid==3">新闻主题</th>
+                    <th class="news1" v-else>街镇动态主题</th>
+                    <th class="news2">作者</th>
+                    <th class="news3">时间</th>
+                    <th class="last_td">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in items">
+                    <td class="first_td">
+                        <input type="checkbox" name="checkbox" id="checkbox" :value="item.id">
+                    </td>
+                    <td class="num_td">{{index+num+1}}</td>
+                    <td class="news1">{{item.title}}</td>
+                    <td class="news2">{{item.author}}</td>
+                    <td class="news3">{{item.insertTime}}</td>
+                    <td class="last_td">
+                        <a :href="'manageInfo.html?idid=4&id='+item.id">编辑</a>&nbsp;&nbsp;&nbsp;
+                        <a href="" :value="item.id" data-toggle="modal" data-target="#myModal"
+                           onclick="getId(this)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 工作简报 idid=5-->
+            <table class="list" v-if="idid==5" id="work">
+                <thead>
+                <tr>
+                    <th class="first_td">
+                        <input type="checkbox" id="checkboxALL" onclick="checkboxALL()">
+                    </th>
+                    <th class="num_td">编号</th>
+                    <th class="policy1">主题</th>
+                    <th class="policy2">上传时间</th>
+                    <th class="last_td">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in items">
+                    <td class="first_td">
+                        <input type="checkbox" name="checkbox" id="checkbox" :value="item.id">
+                    </td>
+                    <td class="num_td">{{index+num+1}}</td>
+                    <td class="policy1">{{item.title}}</td>
+                    <td class="policy2">{{item.insertTime}}</td>
+                    <td class="last_td">
+                        <a :href="item.url">下载</a>&nbsp;&nbsp;
+                        <!-- <a href="">更新</a>&nbsp;&nbsp; -->
+                        <a href="" :value="item.id" data-toggle="modal" data-target="#myModal"
+                           onclick="getId(this)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 政策制度管理 idid=6 -->
+            <table class="list" v-if="idid==6" id="policy">
+                <thead>
+                <tr>
+                    <th class="first_td">
+                        <input type="checkbox" id="checkboxALL" onclick="checkboxALL()">
+                    </th>
+                    <th class="num_td">编号</th>
+                    <th class="policy1">主题</th>
+                    <th class="policy2">上传时间</th>
+                    <th class="last_td">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in items">
+                    <td class="first_td">
+                        <input type="checkbox" name="checkbox" id="checkbox" :value="item.id">
+                    </td>
+                    <td class="num_td">{{index+num+1}}</td>
+                    <td class="policy1">{{item.title}}</td>
+                    <td class="policy2">{{item.insertTime}}</td>
+                    <td class="last_td">
+                        <a :href="'manageInfo.html?idid=6&id='+item.id">编辑</a>&nbsp;&nbsp;&nbsp;
+                        <a href="" :value="item.id" data-toggle="modal" data-target="#myModal"
+                           onclick="getId(this)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <!-- 文件法规 idid=7 -->
+            <table class="list" v-if="idid==7" id="file">
+                <thead>
+                <tr>
+                    <th class="first_td">
+                        <input type="checkbox" id="checkboxALL" onclick="checkboxALL()">
+                    </th>
+                    <th class="num_td">编号</th>
+                    <th class="policy1">主题</th>
+                    <th class="policy2">上传时间</th>
+                    <th class="last_td">操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(item,index) in items">
+                    <td class="first_td">
+                        <input type="checkbox" name="checkbox" id="checkbox" :value="item.id">
+                    </td>
+                    <td class="num_td">{{index+num+1}}</td>
+                    <td class="policy1">{{item.title}}</td>
+                    <td class="policy2">{{item.insertTime}}</td>
+                    <td class="last_td">
+                        <a :href="item.url">下载</a>&nbsp;&nbsp;&nbsp;
+                        <!-- <a href="">更新</a>&nbsp;&nbsp;&nbsp; -->
+                        <a href="" :value="item.id" data-toggle="modal" data-target="#myModal"
+                           onclick="getId(this)">删除</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+        <!-- 翻页栏 -->
+        <div class="pages" id="pages">
+            <div class="totalElements">共有{{totalElements}}个记录</div>
+            <div class="btn_pages">
+                <button class="btn btn-primary btn-page" onclick="firstPage()">首页</button>
+                <button class="btn btn-primary btn-page" onclick="subPage()">上一页</button>
+                <button class="btn btn-primary btn-page" onclick="addPage()">下一页</button>
+                <button class="btn btn-primary btn-page" onclick="lastPage()">尾页</button>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="text" class="form-control" v-model="nowPage">/{{allPages}}页
+                <button class="btn btn-primary btn-page" onclick="skipPage()">跳转</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">
+                    提示：
+                </h4>
+            </div>
+            <div class="modal-body">
+                确认删除此记录？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteRecord()">
+                    确认删除
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+<!-- 类别管理模态框 -->
+<div id="one_modal" class="one_modal">
+    <div class="one-modal-content" id="one-modal-content">
+        <div class="one-modal-header">
+            <h3>类别管理</h3>
+        </div>
+        <div class="one-modal-body" id="one-modal-body">
+            <div class="typeList" id="type_topic">
+                <div v-if="idid==0||idid==1" class="name_word">名称描述</div>
+                <div v-if="idid==2" class="name_word">名称描述</div>
+                <div v-if="idid==2" class="role_name">role</div>
+                <div class="btn_word"></div>
+            </div>
+            <div class="typeList" id="typeList" v-for="item in items">
+                <div v-if="idid==0||idid==1" class="type_word">{{item.problemCategory}}</div>
+                <div v-if="idid==2" class="type_word">{{item.desc}}</div>
+                <div v-if="idid==2" class="role_word">{{item.role}}</div>
+                <button class="btn btn-danger type_delete" :value="item.id" onclick="typeDelete(this)">删除</button>
+            </div>
+            <div class="new_type">
+                <input type="text" class="form-control" v-model="typeInput">
+                <input v-if="idid==2" type="text" class="form-control" v-model="typeInput2">
+                <button class="btn btn-success newtype_success" onclick="newType()">新建类型</button>
+            </div>
+        </div>
+        <button id="btnSure" class="btn btn-primary" onclick="btnClose()">关闭</button>
+    </div>
+</div>
+
+<!-- 上传文件模态框 -->
+<div id="two_modal" class="one_modal">
+    <div class="two-modal-content" id="one-modal-content">
+        <div class="two-modal-header">
+            <h3>文件上传</h3>
+        </div>
+        <div class="one-modal-body" id="modal-body">
+            <span>请输入主题：</span>
+            <input type="text" class="form-control" v-model="fileTopic">
+            <input type="file" id="Ufile" class="form-control file">
+            <button class="btn btn-success btnSure" onclick="fileSubmit()">确认提交</button>
+        </div>
+
+        <button id="btnSure" class="btn btn-primary" onclick="btnClose()">关闭</button>
+
+    </div>
+</div>
+
+<!-- 新建用户模态框 -->
+<div id="user_modal" class="one_modal">
+    <div class="two-modal-content" id="one-modal-content">
+        <div class="two-modal-header">
+            <h3>账户</h3>
+        </div>
+        <div class="one-modal-body" id="user-modal-body">
+            <label for="inputPassword" class="name_text  control-label">登录名</label>
+            <input type="text" v-model="loginName" class="input_text form-control" id="inputPassword"
+                   placeholder="请输入登录名">
+            <label for="inputPassword" class="name_text  control-label">姓名</label>
+            <input type="text" v-model="userName" class="input_text form-control" id="inputPassword"
+                   placeholder="请输入姓名">
+            <label for="inputPassword" class="name_text  control-label">电话</label>
+            <input type="text" v-model="tel" class="input_text form-control" id="inputPassword" placeholder="请输入您的电话">
+            <label for="name" class="name_text">权限设置</label>
+            <select class="form-control quanxian" v-model="quanxian">
+                <option v-for="item in items" :value="item.id">{{item.desc}}</option>
+            </select>
+            <span class="user_sapn">提示：新建账号密码和登录名相同</span>
+        </div>
+        <div class="new_user">
+            <button id="new_user_btn1" class="btn btn-success" onclick="newUer()">提交</button>
+            <button id="new_user_btn2" class="btn btn-primary" onclick="btnClose()">关闭</button>
+        </div>
+    </div>
+</div>
+
+<!-- 修改密码模态框 -->
+<div id="password_modal" class="one_modal">
+    <div class="two-modal-content" id="one-modal-content">
+        <div class="two-modal-header">
+            <h3>修改密码</h3>
+        </div>
+        <div class="one-modal-body" id="password-modal-body">
+            <label for="inputPassword" class="name_textpro  control-label">新密码</label>
+            <input type="text" v-model="newPass" class="input_text form-control" id="inputPassword" placeholder="">
+            <label for="inputPassword" class="name_textpro  control-label">重复新密码</label>
+            <input type="text" v-model="newPassPro" class="input_text form-control" id="inputPassword" placeholder="">
+        </div>
+        <div class="new_user" id="new_user">
+            <button id="password_btn1" class="btn btn-success" onclick="passwordSubmit(this)">提交</button>
+            <button id="new_user_btn2" class="btn btn-primary" onclick="btnClose()">关闭</button>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script src="../../js/manageCommon.js"></script>
+<script src="../../js/manageAdmin.js"></script>
+
+</html>

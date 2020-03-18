@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>测试</title>
+    <script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+来源：
+<input type="text" id="newsFrom" name="newsFrom"/>
+<br/> 标题：
+<input type="text" id="newsTitle" name="newsTitle"/>
+<br/> 作者：
+<input type="text" id="newsAuthor" name="newsAuthor"/>
+<br/>
+
+<div id="newsBody">
+    <p>欢迎使用 wangEditor 富文本编辑器</p>
+    <p>欢迎使用 wangEditor 富文本编辑器</p>
+    <p>欢迎使用 wangEditor 富文本编辑器</p>
+    <p>欢迎使用 wangEditor 富文本编辑器</p>
+</div>
+
+<script type="text/javascript">
+    var E = window.wangEditor;
+    var editor = new E('#newsBody');
+    editor.customConfig.uploadImgServer = '/file/uploadPic';
+    editor.customConfig.uploadFileName = 'file';
+    editor.create()
+
+    function f() {
+        $.ajax({
+            url: 'news/addNews',
+            type: 'POST',
+            data:
+                {
+                    'newsFrom': $('#newsFrom').val(),
+                    'newsTitle': $('#newsTitle').val(),
+                    'newsAuthor': $('#newsAuthor').val(),
+                    'newsBody': editor.txt.html()
+                },
+            success: function (data) {
+                alert(data.status);
+            },
+            error: function () {
+                alert('error');
+            }
+        })
+    }
+</script>
+<input type="button" onclick="f()" value="提交"/>
+
+</body>
+
+</html>

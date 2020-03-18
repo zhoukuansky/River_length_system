@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title></title>
+
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/phoneNewEvent.css">
+    <link rel="stylesheet" href="../../css/phoneCommon.css">
+
+</head>
+<!-- 320,520 -->
+<script>
+    //通过window.screen.width获取屏幕的宽度
+    var offWidth = 320 / 100; //这里用宽度/100表示1rem取得的px
+    document.getElementsByTagName("html")[0].style.fontSize = offWidth + 'px'; //把rem的值复制给顶级标签html的font-size
+</script>
+
+<body>
+    <div class="container clearfix">
+        <div class="row">
+            <div class="event_header">
+                <a href="phoneAllEvents.html">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <span class="event_title">事务</span>
+            </div>
+        </div>
+        <div class="row">
+            <form action="" method="POST" id="form" enctype="multipart/form-data">
+                <div class="event_body">
+                    <div class="enent_classify clearfix">
+                        <span>事件类别：</span>
+                        <select class="select_classify" v-model="type" onchange="select_change()" id="select_classify">
+                            <option v-for="item in items" :value="item.id">
+                                {{item.problemCategory}}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="event_info clearfix">
+                        <span> 事件描述：</span>
+                        <textarea name="textarea" v-model="info" id="textarea" required="" placeholder="请输入详细描述"></textarea>
+                    </div>
+                    <div class="map clearfix">
+                        <span>位置：</span>
+                        <button class="btn btn-success btn_map">
+                            <a href="phoneMap.html">
+                                <span class="glyphicon glyphicon-arrow-right"></span>
+                                地图页面</a>
+                        </button>
+                    </div>
+                    <div class="address clearfix">
+                        <span>获取到位置：(不可填，显示如下)</span>
+                        <div class="addr">{{x}} {{y}}</div>
+                        <div class="addr">{{address}}</div>
+                    </div>
+                    <div class="img clearfix">
+                        <span>照片：</span>
+                        <input type="file" accept="image/*" class="file" id="Ufile" name="Ufile" value="">
+                    </div>
+                </div>
+                <button type="button" onclick="URLdata()" class="btn btn-success tijiao">提交</button>
+            </form>
+
+        </div>
+    </div>
+</body>
+<script src="../../assets/jquery/jquery-3.3.1.min.js"></script>
+<script src="../../assets/vue/vue.min.js"></script>
+<script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../js/phoneCommon.js"></script>
+<script src="../../js/phoneNewEvent.js"></script>
+
+</html>

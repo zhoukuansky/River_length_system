@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title></title>
+
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../../css/phoneCommon.css"> -->
+    <link rel="stylesheet" href="../../css/phoneDeal.css">
+
+</head>
+<!-- 320,520 -->
+
+<body>
+    <div class="container clearfix" id="conent">
+        <div class="row">
+            <div class="event_header">
+                <span class="event_title">事件详情</span>
+                <a href="phoneAllEvents.html">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="details">
+                <table id="table">
+                    <tr>
+                        <td>事件类别</td>
+                        <td>{{type}}</td>
+                    </tr>
+                    <tr>
+                        <td>事件描述</td>
+                        <td>{{desc}}</td>
+                    </tr>
+                    <tr>
+                        <td>上传用户</td>
+                        <td>{{uploadUserName}}</td>
+                    </tr>
+                    <tr v-if="idid==1||idid==2">
+                        <td>处理事件用户</td>
+                        <td>{{dealUserName}}</td>
+                    </tr>
+                    <tr>
+                        <td>事件创建时间</td>
+                        <td>{{time}}</td>
+                    </tr>
+                    <tr v-if="idid==1||idid==3">
+                        <td>开始处理时间</td>
+                        <td>{{startTime}}</td>
+                    </tr>
+                    <tr v-if="idid==3">
+                        <td>完成处理时间</td>
+                        <td>{{endTime}}</td>
+                    </tr>
+                    <tr>
+                        <td>经纬度</td>
+                        <td>
+                            <a :href="'phoneQueryMap.html?xy='+xy+'&idid='+idid">{{xy}}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>详细地址</td>
+                        <td>{{addr}}</td>
+                    </tr>
+                    <tr>
+                        <td>处理进程</td>
+                        <td>{{process}}</td>
+                    </tr>
+                    <tr v-if="idid==3">
+                        <td>事件处理描述</td>
+                        <td>{{doInfo}}</td>
+                    </tr>
+                    <tr>
+                        <td>照片</td>
+                        <td>
+                            <img :src="src" alt="" width="200px">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="text" id="text" v-if="idid==1">
+                <span>请输入您处理过程</span>
+                <br>
+                <textarea name="" id="" v-model="textarea"></textarea>
+                <button class="btn btn-success" onclick="finish()">事件完成提交</button>
+            </div>
+
+        </div>
+
+    </div>
+</body>
+<script src="../../assets/jquery/jquery-3.3.1.min.js"></script>
+<script src="../../assets/vue/vue.min.js"></script>
+<script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../js/phoneCommon.js"></script>
+<script src="../../js/phoneDeal.js"></script>
+
+</html>

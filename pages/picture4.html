@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>温江小微水体分布概况</title>
+
+    <link rel="stylesheet" href="../css/picture.css">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/vue/vue.min.js"></script>
+
+</head>
+
+<body>
+<div id="body">
+    <div class="button">
+        <div class="btn_main">
+            <button class="btn btn-success" id="btn" onclick="btn0()">小微水体总分布图</button>
+            <button class="btn btn-success" id="btn" onclick="btn1()">水塘总分布图</button>
+            <button class="btn btn-success" id="btn" onclick="btn2()">池塘水体分布图</button>
+            <button class="btn btn-success" id="btn" onclick="btn3()">景观水体分布图</button>
+            <button class="btn btn-success" id="btn" onclick="btn4()">湿地水体分布图</button>
+            <button class="btn btn-success" id="btn" onclick="btn5()">养殖水体分布图</button>
+        </div>
+    </div>
+    <div class="jiaotong">
+        <h1>{{title}}</h1>
+    </div>
+    <div class="content">
+        <a :href="src" :download="word" title="点击下载当前图片">
+            <span class="glyphicon glyphicon-save"></span>
+        </a>
+        <div class="img0">
+            <img :src="src" width="1200px" alt="">
+        </div>
+    </div>
+</div>
+</body>
+<script src="../js/picture4.js"></script>
+
+</html>

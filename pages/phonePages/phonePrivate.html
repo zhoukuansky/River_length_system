@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title></title>
+
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../../css/phoneCommon.css"> -->
+    <link rel="stylesheet" href="../../css/phonePrivate.css">
+
+</head>
+<!-- 320,520 -->
+
+<body>
+<div class="container clearfix" id="conent">
+    <div class="row">
+        <div class="event_header">
+            <span class="event_title">个人中心</span>
+            <a href="phoneAllEvents.html"><span class="glyphicon glyphicon-chevron-left"></span></a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="user">
+            <span>登录名</span>
+            <input type="text" v-model="user" class="form-control input_text">
+        </div>
+    </div>
+    <div class="row">
+        <div class="user">
+            <span>姓名</span>
+            <input type="text" v-model="name" class="form-control input_text">
+        </div>
+    </div>
+    <div class="row">
+        <div class="user">
+            <span>电话</span>
+            <input type="text" v-model="phone" class="form-control input_text">
+        </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-primary update" onclick="updateInfo()">提交修改信息</button>
+    </div>
+    <div class="row">
+        <div class="user">
+            <span>原密码</span>
+            <input type="text" v-model="pass" class="form-control input_text">
+        </div>
+    </div>
+    <div class="row">
+        <div class="user">
+            <span>新密码</span>
+            <input type="text" v-model="newPass" class="form-control input_text">
+        </div>
+    </div>
+    <div class="row">
+        <div class="user">
+            <span>新密码</span>
+            <input type="text" v-model="newPass2" class="form-control input_text">
+        </div>
+    </div>
+    <div class="row">
+        <button class="btn btn-success update" onclick="updateMima()">
+            <span class="glyphicon glyphicon-pencil"></span>
+            修改密码
+        </button>
+    </div>
+
+</div>
+</body>
+<script src="../../assets/jquery/jquery-3.3.1.min.js"></script>
+<script src="../../assets/vue/vue.min.js"></script>
+<script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="../../js/phoneCommon.js"></script>
+<script src="../../js/phonePrivate.js"></script>
+
+</html>

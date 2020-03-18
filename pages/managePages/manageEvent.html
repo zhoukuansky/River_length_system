@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>事件详情</title>
+
+    <link rel="stylesheet" href="../../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/manageCommon.css">
+    <link rel="stylesheet" href="../../css/manageEvent.css">
+
+    <script src="https://unpkg.com/wangeditor@3.1.1/release/wangEditor.min.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=4pZ2iYQTdC18Z40KHc9f2HLNGEZbcN4v"></script>
+    <script src="../../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../../assets/vue/vue.min.js"></script>
+    <script src="../../assets/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- 网站头部 -->
+    <div class="header clearfix">
+        <a href="../index.html" target="_blank" title="去往网站主页...">
+            <span class="glyphicon glyphicon-home"></span>
+            <span>系统主页</span>
+        </a>
+        <ul class="ul_right" id="ul_right">
+            <li>
+                <span class="glyphicon glyphicon-user"></span>
+                <span>{{userId}}</span>
+            </li>
+            <li>
+                <span class="glyphicon glyphicon-cloud"></span>
+                <span>{{time}}</span>
+            </li>
+            <li class="last_li" title="退出登陆" onclick="loginOut()">
+                <div class="center-block">
+                    <img src="../../images/source.png" width="40px" alt="">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!-- 网站左部导航栏 -->
+    <div class="nav clearfix">
+        <ul>
+            <li>
+                <a href="admin.html?idid=0" name="aa">
+                    <span class="glyphicon glyphicon-fire icon"></span>
+                    <span>未完成事件</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin.html?idid=1" name="aa">
+                    <span class="glyphicon glyphicon-leaf icon"></span>
+                    <span>已完成事件</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin.html?idid=2" name="aa">
+                    <span class="glyphicon glyphicon-th-large icon"></span>
+                    <span>人员信息管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin.html?idid=3" name="aa">
+                    <span class="glyphicon glyphicon-th-list icon"></span>
+                    <span>新闻消息管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin.html?idid=4" name="aa">
+                    <span class="glyphicon glyphicon-tint icon"></span>
+                    <span>街镇动态管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin.html?idid=5" name="aa">
+                    <span class="icon glyphicon glyphicon-envelope"></span>
+                    <span>工作简报管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin.html?idid=6" name="aa">
+                    <span class="icon glyphicon glyphicon-book"></span>
+                    <span>政策制度管理</span>
+                </a>
+            </li>
+            <li>
+                <a href="admin.html?idid=7" name="aa">
+                    <span class="glyphicon glyphicon-file icon"></span>
+                    <span>文件法规管理</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <!-- 网站右部主体部分 -->
+    <div class="main clearfix">
+        <div class="inner">
+            <div class="tet">事件详情</div>
+            <table id="table">
+                <tbody>
+                    <tr>
+                        <td>事件类别</td>
+                        <td>{{type}}</td>
+                    </tr>
+                    <tr>
+                        <td>事件描述</td>
+                        <td>{{info}}</td>
+                    </tr>
+                    <tr>
+                        <td>上传用户</td>
+                        <td>{{uploadUserName}}</td>
+                    </tr>
+                    <tr v-if="markInput==1||markInput==2">
+                        <td>处理事件用户</td>
+                        <td>{{dealUserName}}</td>
+                    </tr>
+                    <tr>
+                        <td>事件创建时间</td>
+                        <td>{{time}}</td>
+                    </tr>
+                    <tr v-if="markInput==1||markInput==2">
+                        <td>事件开始处理时间</td>
+                        <td>{{startTime}}</td>
+                    </tr>
+                    <tr v-if="markInput==2">
+                        <td>事件完成时间</td>
+                        <td>{{endTime}}</td>
+                    </tr>
+                    <tr>
+                        <td>经纬度</td>
+                        <td>
+                            <a :href="'manageMap.html?xy='+xy+'&idid='+idid">{{xy}}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>详细地址</td>
+                        <td>{{addr}}</td>
+                    </tr>
+                    <tr>
+                        <td>处理进程</td>
+                        <td>{{pro}}</td>
+                    </tr>
+                    <tr v-if="markInput==2">
+                        <td>事件处理描述</td>
+                        <td>{{doInfo}}</td>
+                    </tr>
+                    <tr id="last_tr">
+                        <td>照片</td>
+                        <td>
+                            <img height="300px" :src="src" alt="">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="textarea" id="word" v-if="markInput==1">
+                <div>请输入您的处理过程或者相关描述:</div>
+                <textarea name="" id="text" v-model="word"></textarea>
+                <button class="btn btn-success" onclick="tijiao()">事件处理完成</button>
+            </div>
+
+        </div>
+    </div>
+</body>
+<script src="../../js/manageCommon.js"></script>
+<script src="../../js/manageEvent.js"></script>
+
+</html>

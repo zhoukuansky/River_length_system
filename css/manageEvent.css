@@ -1,0 +1,72 @@
+.main {
+    min-height: 1000px;
+    height: 100%;
+}
+
+.inner {
+    height: 1000px;
+    width: 900px;
+    background: white;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.tet {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 20px;
+    color: rgb(16, 17, 16);
+}
+
+table {
+    table-layout: fixed;
+    text-align: center;
+    width: 800px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+table tr td {
+    border: 1px solid rgb(41, 100, 41);
+    min-height: 50px;
+    height: 50px;
+    word-wrap: break-word;
+}
+
+td:nth-child(1) {
+    width: 20%;
+    background: rgb(139, 208, 152);
+}
+
+td:nth-child(2):hover {
+    background: rgb(139, 208, 152);
+}
+
+#last_tr {
+    height: 200px;
+}
+
+#last_tr img {
+    margin: 15px;
+}
+
+.textarea {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.textarea div {
+    font-size: 20px;
+    margin: 10px 0px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+}
+
+.btn {
+    float: right;
+    margin-top: 15px;
+    margin-right: 20px;
+}

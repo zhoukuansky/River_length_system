@@ -1,0 +1,50 @@
+.content {
+    width: 1250px;
+    margin: 30px auto;
+    border: 2px solid rgb(198, 230, 198);
+}
+
+a {
+    font-size: 30px;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+span {
+    color: rgb(120, 177, 132);
+}
+
+.img0 {
+    width: 1250px;
+    padding: 25px;
+}
+
+.jiaotong {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: rgb(100, 145, 103);
+}
+
+.zhiqu {
+    width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    color: rgb(100, 145, 103);
+}
+
+.button {
+    width: 1200px;
+    margin: 50px auto 0 auto;
+}
+
+.btn_main {
+    width: 750px;
+    margin: 0 auto;
+}
+
+#btn {
+    width: 120px;
+    font-size: 12px;
+}

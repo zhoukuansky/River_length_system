@@ -1,0 +1,81 @@
+.content {
+    width: 1000px;
+    margin: 0 auto;
+    height: auto;
+}
+
+.information {
+    margin-top: 10px;
+    padding: 40px 0px;
+    width: 1000px;
+    min-height: 500px;
+    background: #fff;
+    color: rgb(43, 47, 45);
+}
+
+.information h1 {
+    display: block;
+    width: 800px;
+    font-size: 30px;
+    font-weight: bold;
+    min-height: 35px;
+    line-height: 35px;
+    text-align: center;
+    margin: 0px auto;
+}
+
+.title_info {
+    color: rgb(65, 73, 65);
+    width: 800px;
+    margin: 20px auto 0px auto;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 13px;
+    background: rgb(187, 203, 191);
+}
+
+.info {
+    margin: 30px auto;
+    width: 800px;
+    overflow-x:hidden;
+    color: black;
+    height: auto;
+}
+
+.table_info {
+    width: 900px;
+    height: auto;
+    text-align: center;
+    border: 1px solid rgb(146, 186, 157);
+    margin: 15px auto;
+    font-size: 14px;
+}
+
+tr {
+    width: 900px;
+    height: 50px;
+    border: 1px solid rgb(146, 186, 157);
+}
+
+tr td {
+    background: rgb(245, 247, 245);
+}
+
+.td1 {
+    width: 20%;
+    min-height: 50px;
+    background: rgb(222, 231, 224);
+}
+
+.td2:hover {
+    background: rgb(222, 231, 224);
+}
+
+.img {
+    margin: 10px;
+}
+
+.tr_img {
+    min-height: 300px;
+}

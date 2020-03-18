@@ -1,0 +1,228 @@
+*{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    font-family: "宋体";
+}
+.safasdvnsa{
+background: rgb(216, 165, 165);
+}
+body{
+    width: 100%;
+    height: auto;
+    font-family: "宋体";
+    overflow-x: hidden;
+    background: #f2f2f2;
+    color: #fff;
+}
+a{
+    text-decoration: none;
+}
+.clearfix:after{
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: ".";
+    clear: both;
+    height: 0;
+}
+.header{
+    height: 225px;
+    width: 100%;
+    min-width: 1000px;
+    font-weight: bold;
+    color: #fff;
+    background: -webkit-linear-gradient(rgb(208, 230, 210), rgb(208, 230, 210)); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(rgb(208, 230, 210), rgb(208, 230, 210)); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(rgb(208, 230, 210), rgb(208, 230, 210)); /* Firefox 3.6 - 15 */
+    background: linear-gradient(rgb(208, 230, 210), rgb(208, 230, 210)); /* 标准的语法（必须放在最后） */
+}
+.hearder_top{
+    /* background: #2e353f; */
+     background: #6a7d67; 
+
+    min-width: 1000px;
+}
+.header_content{
+    height: 35px;
+    line-height: 35px;
+    width: 1000px;
+    margin: 0 auto;
+}
+.header_welcome{
+padding-left: 10px;
+float: left;
+}
+.header_login{
+    float: right;
+}
+.header_login a{
+color: #fff;
+text-decoration: none;
+}
+.header_main{
+    width: 1000px;
+    margin: 0 auto;
+    height: 190px;
+}
+.topic{
+    display: inline-block;
+}
+.topic h1{
+    color: rgb(99, 111, 100);
+    font-size: 50px;
+    text-shadow:1px 1px 1px #FFFFFF;
+}
+.topic_text{
+    margin-left: 50px;
+}
+.logo{
+    display: inline-block;
+    position: relative;
+    float: right;
+    top:10px;
+}
+.logo{
+    animation:mymove 5s infinite;
+    -moz-animation:mymove 5s infinite; /* Firefox */
+    -webkit-animation:mymove 5s infinite; /* Safari and Chrome */
+    -o-animation:mymove 5s infinite; /* Opera */
+}
+@-webkit-keyframes mymove /* Safari and Chrome */
+{
+0% {left:0px;opacity:1;}
+50% {left: -200px;opacity:0;}
+100%{left: 0px;opacity:1;}
+}
+@keyframes mymove
+{
+    0% {left:0px;opacity:1;}
+    50% {left: -200px;opacity:0;}
+    100%{left: 0px;opacity:1;}
+}
+@-moz-keyframes mymove /* Firefox */
+{
+    0% {left:0px;opacity:1;}
+    50% {left: -200px;opacity:0;}
+    100%{left: 0px;opacity:1;}
+}
+@-o-keyframes mymove /* Opera */
+{
+    0% {left:0px;opacity:1;}
+    50% {left: -200px;opacity:0;}
+    100%{left: 0px;opacity:1;}
+}
+
+.nav_box{
+    width: 100%;
+    height: 50px;
+    background:rgb(99, 111, 100); 
+    /* background: #49872E;  */
+    color: #fff;
+    min-width: 1000px;
+    font-size: 16px;
+}
+.nav_main{
+    width: 1000px;
+    min-width: 1000px;
+    margin: 0 auto;
+    height: 50px;
+}
+.nav{
+    width: 1000px;
+    height: 50px;
+    padding-top:2px;
+}
+.nav li{
+    display: inline-block;
+    width: 116px;
+    height:48px;
+    padding-top:2px;
+}
+li a{
+    display: block;
+    width:110px;
+    height:44px;
+    text-align: center;
+    color: #fff;
+    border-radius: 3px;
+    text-decoration: none;
+}
+.active{
+    background: #f2f2f2;
+    color: #1a8244;
+}
+.nav li a:hover{
+    color: #1a8244;
+}
+
+.prompt{
+    background: rgb(208, 230, 210);
+    border: #dfd4d4 1px solid;
+    width: 1000px;
+    height: 35px;
+    margin: 0 auto;
+    line-height: 35px;
+    color: #125a2f;
+    padding-left: 10px;
+}
+.date_now{
+    float: left;
+}
+.search{
+    float: right;
+    margin-right: 15px;
+}
+.search input{
+    width: 200px;
+    height: 25px;
+    line-height: 26px;
+}
+.search button{
+    line-height: 25px;
+    height: 25px;
+    padding: 1px 4px 4px 4px;
+    margin: 0 0 5px 0px;
+}
+.footer{
+    padding-top:15px;
+    padding-bottom: 0px;
+}
+.link{
+    padding: 0;
+    width: 1000px;
+    margin: 0 auto;
+    display: block;
+}
+.link_box_select{
+    width:194px;
+    padding: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #9e9e9e;
+}
+.option{
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+    text-align: start;
+    height: 50px;
+    line-height: 50px;
+    
+}
+.link_box_select:hover option{
+    cursor: pointer;
+}
+
+.foot_main{
+    width: 1000px;
+    margin: 15px auto;
+    border-top: 4px solid #64b86e;
+    color: #829d8a;
+    text-align: center;
+    padding-top: 10px;
+}
+.foot_main p{
+    line-height: 20px;
+    font-size: 12px;
+}

@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>列表信息</title>
+
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/list.css">
+    <script src="../assets/jquery/jquery-3.3.1.min.js"></script>
+    <script src="../assets/vue/vue.min.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <!-- 网站头部 -->
+    <div class="header clearfix">
+        <div class="hearder_top">
+            <div class="header_content">
+                <span class="header_welcome">欢迎来到温江区河长制信息管理网站
+                    <span class="glyphicon   glyphicon-arrow-right"></span>
+                </span>
+                <span class="header_login">
+                    <span class="glyphicon glyphicon-user"></span>
+                    <a href="../pages/managePages/login.html" target="_blank">管理员和用户登录</a>&nbsp;||&nbsp;
+                    <span class="glyphicon glyphicon-user"></span>
+                    <a href="../pages/phonePages/phoneLogin.html" target="_blank">手机端登录</a>
+                </span>
+            </div>
+        </div>
+        <div class="header_main">
+            <div class="topic" id="topic">
+                <h1>成都温江区河长制</h1>
+                <h1 class="topic_text">信息管理系统</h1>
+            </div>
+            <div class="logo" id="logo">
+                <img class="img" src="../images/logo.jpg" height="150px" alt="">
+            </div>
+        </div>
+    </div>
+    <!-- 网站导航 -->
+    <div class="nav_box clearfix">
+        <div class="nav_main">
+            <ul class="nav" id="nav">
+                <li class="">
+                    <a class="" href="index.html?idid=0" name="aa">首页</a>
+                </li>
+                <li class="">
+                    <a href="list.html?idid=1" name="aa">新闻中心</a>
+                </li>
+                <li class="">
+                    <a href="list.html?idid=2" name="aa">河长名单</a>
+                </li>
+                <li class="">
+                    <a href="list.html?idid=3" name="aa">街镇动态</a>
+                </li>
+                <li class="">
+                    <a href="list.html?idid=4" name="aa">工作简报</a>
+                </li>
+                <li class="">
+                    <a href="showPage.html?idid=5" name="aa">地图展示</a>
+                </li>
+                <li class="">
+                    <a href="list.html?idid=6" name="aa">政策制度</a>
+                </li>
+                <li class="">
+                    <a href="list.html?idid=7" name="aa">文件法规</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 网站提示信息 -->
+    <div class="prompt clearfix">
+        <div class="date_now" id="date_now">
+            <span class="glyphicon glyphicon-asterisk"></span>
+            <span>今天：{{dateNow}}&nbsp;&nbsp;&nbsp;&nbsp;{{weekNow}}</span>
+        </div>
+        <div class="search">
+            <input type="text" placeholder="请输入关键字" required="" />
+            <button type="button" class="btn btn-success">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </div>
+    </div>
+    <!-- 网站主体部分 -->
+    <div class="content clearfix">
+        <div class="list_body">
+            <div class="body_title">详情列表</div>
+            <div class="body_list" id="body_ul" v-if="idid!=2">
+                <ul class="body_ul">
+                    <li v-for="item in list">
+                        <a v-if="idid!=7&&idid!=4" :href="'../pages/information.html?idid='+idid+'&id='+item.id" :title="item.title">
+                            <span class="span_title">{{item.title}}</span>
+                            <span class="span_time">{{item.insertTime}}</span>
+                        </a>
+                        <a v-else :href="item.url" :title="item.title">
+                            <span class="span_title">{{item.title}}</span>
+                            <span class="span_time">{{item.insertTime}}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="body_num" id="pages" v-if="idid!=2">
+                <ul class="pages">
+                    <li>
+                        <a onclick="subPage()">&laquo;</a>
+                    </li>
+                    <input class="" type="text" v-model="number" />/{{allPages}}页
+                    <button class="btn btn-success btn-sm" onclick="skipPage()">转到</button>
+                    <li>
+                        <a onclick="addPage()">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="hezhang" id="hezhang" v-if="idid==2">
+                <div id="name_list"></div>
+            </div>
+
+        </div>
+        <div class="list_register">
+            <div class="register_header_line">
+                <span class="glyphicon glyphicon-th-list"></span>
+                导航栏</div>
+            <div class="register_header_list">
+                <ul id="register">
+                    <li v-for="item in register">
+                        <a href="">
+                            <span class="glyphicon glyphicon-chevron-right"></span>{{item.title}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 网站尾部信息 -->
+    <div class="footer clearfix">
+        <div class="link">
+            <select class="link_box_select" id="select1" onchange="javascript:selectChange(this.id);">
+                <option class="option" value="">国家级网站</option>
+                <option value="http://www.npc.gov.cn/">中国人大</option>
+                <option value="http://www.gov.cn/">中央人民政府门户网站</option>
+                <option value="http://www.mwr.gov.cn/">中华人民共和国水利部网站</option>
+                <option value="http://www.mohurd.gov.cn/">住建部</option>
+                <option value="http://www.zhb.gov.cn/">环保部</option>
+                <option value="http://www.cjw.com.cn/Index.html">水利部长江水利委员会</option>
+            </select>
+            <select class="link_box_select" id="select2" onchange="javascript:selectChange(this.id);">
+                <option value="">省级相关网站</option>
+                <option value="http://www.scwater.gov.cn/">四川省水利厅</option>
+                <option value="http://www.schj.gov.cn/">四川省环保厅</option>
+                <option value="http://www.scjst.gov.cn/main/home.html">四川省住建厅</option>
+            </select>
+            <select class="link_box_select" id="select3" onchange="javascript:selectChange(this.id);">
+                <option value="">市级相关网站</option>
+                <option value="http://www.cdrd.gov.cn/html/index.shtml">成都人大</option>
+                <option value="http://www.chengdu.gov.cn/">成都市人民政府</option>
+                <option value="http://www.cdcc.gov.cn/index.action">成都市建设委员会 </option>
+                <option value="http://www.cdepb.gov.cn/cdepbws/web/index.aspx">成都环保局</option>
+                <option value="http://www.cdcg.gov.cn/">成都市城市管理委员会</option>
+                <option value="http://www.cdagri.gov.cn/">成都市农业委员会 </option>
+            </select>
+            <select class="link_box_select" id="select4" onchange="javascript:selectChange(this.id);">
+                <option value="">各地水务网</option>
+                <option value="http://www.cdwater.gov.cn/">成都市水务局</option>
+                <option value="http://www.bjwater.gov.cn/pub/bjwater/index.html">北京市水务局</option>
+                <option value="http://www.shanghaiwater.gov.cn/">上海市水务局</option>
+                <option value="http://www.gzwater.gov.cn/portal/site/site/portal/gzswj/index.portal">广州市水务局</option>
+                <option value="http://www.szwrb.gov.cn/">深圳市水务局</option>
+                <option value="http://www.tjsw.gov.cn/pub/tjwcb/index.html">天津市水务局</option>
+                <option value="http://www.cqwater.gov.cn/Pages/Home.aspx">重庆市水利局</option>
+                <option value="http://www.wsd.gov.hk/sc/home/index.html">香港水务署</option>
+            </select>
+            <select class="link_box_select" id="select5" onchange="javascript:selectChange(this.id);">
+                <option value="">区市县河长制办公室</option>
+            </select>
+
+        </div>
+        <div class="foot_main">
+            <p>主办：温江区水务局 地址：成都市温江区xxxx 电话：xxxxxxxxxx 传真：xxxxxxx 邮编：xxxxxx
+                <br/> Copyright © 2018 www.xxx.cn All Rights Reserved xxxx版权所有 蜀ICP备xxxxxxx号
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="../js/common.js"></script>
+<script src="../js/list.js"></script>
